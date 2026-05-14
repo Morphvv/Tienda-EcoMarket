@@ -10,4 +10,6 @@ public class UsuarioApplication {
 		SpringApplication.run(UsuarioApplication.class, args);
 	}
 
+	//Faltan las validaciones jiji jaja xd
+
 }
