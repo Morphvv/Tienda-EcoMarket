@@ -19,23 +19,23 @@ public class ProductoAsociadoTiendaService {
     private ProductoAsociadoTiendaRepository productoAsociadoTiendaRepository;
 
     //Crear un producto asociado a la tienda
-    public ProductoAsociadoTienda crear(ProductoAsociadoTienda productoAsociadoTienda){
+    public ProductoAsociadoTienda crearProductoAsociado(ProductoAsociadoTienda productoAsociadoTienda){
         productoAsociadoTienda.setVisibleEnTienda(true);
         return productoAsociadoTiendaRepository.save(productoAsociadoTienda);
     }
 
     //Listar todos los productos asociados a la tienda
-    public List <ProductoAsociadoTienda> listar(){
+    public List <ProductoAsociadoTienda> listarTiendaProducto(){
         return productoAsociadoTiendaRepository.findAll();
     }
 
     //Listar productos asociados a la tienda por id de tienda
-    public List <ProductoAsociadoTienda> listarPorTienda(Long idTienda){
+    public List <ProductoAsociadoTienda> listarPorTiendaProducto(Long idTienda){
         return productoAsociadoTiendaRepository.findByIdTienda(idTienda);
     }
 
     //Modificar producto asociado a la tienda por el id 
-    public ProductoAsociadoTienda modificar(Long id, ProductoAsociadoTienda productoAsociadoTienda){
+    public ProductoAsociadoTienda modificarProductoTienda(Long id, ProductoAsociadoTienda productoAsociadoTienda){
         ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findByIdProductoAsociadoTienda(id).orElse(null);
         if (existente != null){
             existente.setNombreProducto(productoAsociadoTienda.getNombreProducto());
@@ -46,7 +46,7 @@ public class ProductoAsociadoTiendaService {
     }
 
     //Ocultar un producto asociado a la tienda por el id 
-    public ProductoAsociadoTienda ocultarProducto(Long id){
+    public ProductoAsociadoTienda ocultarProductoAsociadoTienda(Long id){
         ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findByIdProductoAsociadoTienda(id).orElse(null);
         if (existente != null){
             existente.setVisibleEnTienda(false);
@@ -56,7 +56,7 @@ public class ProductoAsociadoTiendaService {
     }
 
     //Eliminar producto asociado a la tienda por id
-    public void eliminar(Long id){
+    public void eliminarProductoAsociadoTienda(Long id){
         productoAsociadoTiendaRepository.deleteById(id);
     }
 

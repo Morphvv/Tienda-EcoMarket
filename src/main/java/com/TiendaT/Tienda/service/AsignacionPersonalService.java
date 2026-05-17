@@ -19,7 +19,7 @@ public class AsignacionPersonalService {
     private AsignacionPersonalRepository asignacionPersonalRepository;
 
     //Crear una asignacion de un personal para la tienda
-    public AsignacionPersonal crearAsignacionPersonal(AsignacionPersonal asignacionPersonal){
+    public AsignacionPersonal crearAsignacionP(AsignacionPersonal asignacionPersonal){
         asignacionPersonal.setEstadoAsignacion("ACTIVA");
         return asignacionPersonalRepository.save(asignacionPersonal);
     }
@@ -30,12 +30,12 @@ public class AsignacionPersonalService {
     }
 
     //Listar todas las asignaciones del personal de la tienda por id de tienda
-    public List <AsignacionPersonal> listarPorTiendaAsignacion(Long idTienda){
+    public List <AsignacionPersonal> listarPorTiendaAsignacionP(Long idTienda){
         return asignacionPersonalRepository.findByIdTienda(idTienda);
     }
 
     //Modificar la asignacion del personal de la tienda por su id 
-    public AsignacionPersonal modificarAsignacion(Long idAsignacionPersonal, AsignacionPersonal asignacionPersonal){
+    public AsignacionPersonal modificarAsignacionP(Long idAsignacionPersonal, AsignacionPersonal asignacionPersonal){
         AsignacionPersonal existente = asignacionPersonalRepository.findByIdAsignacion(idAsignacionPersonal).orElse(null);
         if (existente != null){
             existente.setNombreEmpleado(asignacionPersonal.getNombreEmpleado());
@@ -48,7 +48,7 @@ public class AsignacionPersonalService {
     }
 
     //Desactivar la asignacion del personal de la tienda por su id 
-    public AsignacionPersonal desactivarAsignacion(Long id){
+    public AsignacionPersonal desactivarAsignacionP(Long id){
         AsignacionPersonal existente = asignacionPersonalRepository.findByIdAsignacion(idAsignacion).orElse(null);
         if (existente != null){
             existente.setEstadoAsignacion("INACTIVA");
@@ -58,7 +58,7 @@ public class AsignacionPersonalService {
     }
 
     //Eliminar la asignacion del personal de la tienda por su id
-    public void eliminarAsignacion(Long id){
+    public void eliminarAsignacionP(Long id){
         asignacionPersonalRepository.deleteById(id);
     }
 

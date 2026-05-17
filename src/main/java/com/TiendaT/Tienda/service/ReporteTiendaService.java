@@ -20,23 +20,23 @@ public class ReporteTiendaService {
     private ReporteTiendaRepository reporteTiendaRepository;
 
     //Crear reporte de la tienda
-    public ReporteTienda crear(ReporteTienda reporteTienda){
+    public ReporteTienda crearReporteTienda(ReporteTienda reporteTienda){
         reporteTienda.setFechaReporte(LocalDateTime.now());
         return reporteTiendaRepository.save(reporteTienda);
     }
 
     //Listar todos los reportes de la tienda
-    public List <ReporteTienda> listar(){
+    public List <ReporteTienda> listarReporteTienda(){
         return reporteTiendaRepository.findAll();
     }
 
     //Listar reporte por id de tienda
-    public List <ReporteTienda> listarPorTienda(long idTienda){
+    public List <ReporteTienda> listarPorTiendaReporte(long idTienda){
         return reporteTiendaRepository.findByIdTienda(idTienda);
     }
 
     //Modificar reporte de la tienda por el id 
-    public ReporteTienda modificar(Long id, ReporteTienda reporteTienda){
+    public ReporteTienda modificarReporte(Long id, ReporteTienda reporteTienda){
         ReporteTienda existente = reporteTiendaRepository.findByIdReporteTienda(id).orElse(null);
         if (existente != null){
             existente.setTipoReporte(reporteTienda.getTipoReporte());
@@ -48,7 +48,7 @@ public class ReporteTiendaService {
     }
 
     //Eliminar reporte de la tienda por id 
-    public void eliminar(Long id){
+    public void eliminarReporte(Long id){
         reporteTiendaRepository.deleteById(id);
     }
     
