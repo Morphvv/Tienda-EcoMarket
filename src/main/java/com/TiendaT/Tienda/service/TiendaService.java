@@ -19,21 +19,21 @@ public class TiendaService {
     @Autowired
     private TiendaRepository tiendaRepository;
 
-    public Tienda crear(Tienda tienda){
+    public Tienda crearTienda(Tienda tienda){
         tienda.setFechaCreacion(LocalDateTime.now());
         tienda.setEstado("ACTIVA");
         return tiendaRepository.save(tienda);
     }
 
-    public List<Tienda> listar(){
+    public List<Tienda> listarTiendas(){
         return tiendaRepository.findAll();
     }
     
-    public Tienda buscarPorId(Long idTienda){
+    public Tienda buscarTiendaPorId(Long idTienda){
         return tiendaRepository.findbyIdTienda(idTienda);
     }
 
-    public Tienda modificar(Long id, Tienda tienda){
+    public Tienda modificarTienda(Long id, Tienda tienda){
         Tienda tiendaExistente = tiendaRepository.findByIdTienda(id);
         if (tiendaExistente != null) {
             tiendaExistente.setNombre(tienda.getNombre());
@@ -48,7 +48,7 @@ public class TiendaService {
 
     }
 
-    public Tienda desactivar(Long id){
+    public Tienda desactivarTienda(Long id){
         Tienda tiendaExistente = tiendaRepository.findByIdTienda(id);
         if (tiendaExistente != null) {
             tiendaExistente.setEstado("INACTIVA");
@@ -59,7 +59,7 @@ public class TiendaService {
         }
     }
 
-    public void eliminar(Long id){
-        return tiendaRepository.deleteById(id);
+    public void eliminarTienda(Long idTienda){
+        return tiendaRepository.deleteById(idTienda);
     }
 }

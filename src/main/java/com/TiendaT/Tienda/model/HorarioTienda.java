@@ -21,7 +21,7 @@ public class HorarioTienda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idHorario;
+    private Long idHorarioTienda;
 
     private Long idTienda;
     private String diaSemana;
