@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.TiendaT.Tienda.model.HorarioPersonal;
 @Repository
 public interface HorarioPersonalRepository extends JpaRepository<HorarioPersonal, Long> {
-    List<HorarioPersonalRepository> findByIdPersonal(Long idPersonal);
+    List<HorarioPersonal> findByIdAsignacion(Long idAsignacion);
 
 }

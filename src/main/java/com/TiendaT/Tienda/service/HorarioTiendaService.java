@@ -25,32 +25,31 @@ public class HorarioTiendaService {
     }
 
     //Para poder listar todos los horarios creados
-    public List <HorarioTienda> listarHorarioTienda(){
+    public List<HorarioTienda> listarHorarioTienda(){
         return horarioTiendaRepository.findAll();
     }
 
-    //Buscar un horario en especifico por el id
-    public List <HorarioTienda> listarPorTiendaHorario(Long idTienda){
-        return horarioTiendaRepository.findByIdTienda(idTienda)
+    //Buscar un horario en especifico por el id de tienda
+    public List<HorarioTienda> listarPorTiendaHorario(Long idTienda){
+        return horarioTiendaRepository.findByIdTienda(idTienda);
     }
 
     //Para modificar el horario de tienda por su id
     public HorarioTienda modificarHorarioTienda(Long id, HorarioTienda horarioTienda){
-        HorarioTienda existente = horarioTiendaRepository.findByIdHorarioTienda(id);
+        HorarioTienda existente = horarioTiendaRepository.findById(id).orElse(null);
         if (existente != null) {
             existente.setDiaSemana(horarioTienda.getDiaSemana());
-            existente.setHoraInicio(horarioTienda.getHoraInicio());
-            existente.setHoraTermino(horarioTienda.getHoraTermino());
-            existente.setTurno(horarioTienda.getTurno());
+            existente.setHoraApertura(horarioTienda.getHoraApertura());
+            existente.setHoraCierre(horarioTienda.getHoraCierre());
             return horarioTiendaRepository.save(existente);
         } else {
-            return null; 
+            return null;
         }
     }
 
-    //Para desactovar un horario en especifico por su id
+    //Para desactivar un horario en especifico por su id
     public HorarioTienda desactivarHorarioTienda(Long idHorarioTienda){
-        HorarioTienda existente = horarioTiendaRepository.findByIdHorarioTienda(id).orElse(null);
+        HorarioTienda existente = horarioTiendaRepository.findById(idHorarioTienda).orElse(null);
         if (existente != null){
             existente.setActivo(false);
             return horarioTiendaRepository.save(existente);
@@ -58,12 +57,9 @@ public class HorarioTiendaService {
         return null;
     }
 
-
     //Para eliminar un horario por el id
     public void eliminarHorarioTienda(Long idHorarioTienda){
-        HorarioTiendaRepository.deleteById(idHorarioTienda);
+        horarioTiendaRepository.deleteById(idHorarioTienda);
     }
 
-
-    
 }

@@ -21,7 +21,7 @@ public class ReporteTiendaService {
 
     //Crear reporte de la tienda
     public ReporteTienda crearReporteTienda(ReporteTienda reporteTienda){
-        reporteTienda.setFechaReporte(LocalDateTime.now());
+        reporteTienda.setFechaGeneracion(LocalDateTime.now());
         return reporteTiendaRepository.save(reporteTienda);
     }
 
@@ -37,7 +37,7 @@ public class ReporteTiendaService {
 
     //Modificar reporte de la tienda por el id 
     public ReporteTienda modificarReporte(Long id, ReporteTienda reporteTienda){
-        ReporteTienda existente = reporteTiendaRepository.findByIdReporteTienda(id).orElse(null);
+        ReporteTienda existente = reporteTiendaRepository.findById(id).orElse(null);
         if (existente != null){
             existente.setTipoReporte(reporteTienda.getTipoReporte());
             existente.setPeriodoInicio(reporteTienda.getPeriodoInicio());

@@ -34,20 +34,20 @@ public class ProductoAsociadoTiendaService {
         return productoAsociadoTiendaRepository.findByIdTienda(idTienda);
     }
 
-    //Modificar producto asociado a la tienda por el id 
+    //Modificar producto asociado a la tienda por el id
     public ProductoAsociadoTienda modificarProductoTienda(Long id, ProductoAsociadoTienda productoAsociadoTienda){
-        ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findByIdProductoAsociadoTienda(id).orElse(null);
+        ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findById(id).orElse(null);
         if (existente != null){
             existente.setNombreProducto(productoAsociadoTienda.getNombreProducto());
-            existente.setVisibleEnTienda(productoAsociadoTienda.getVisibleEnTienda());
+            existente.setVisibleEnTienda(productoAsociadoTienda.isVisibleEnTienda());
             return productoAsociadoTiendaRepository.save(existente);
         }
         return null;
     }
 
-    //Ocultar un producto asociado a la tienda por el id 
+    //Ocultar un producto asociado a la tienda por el id
     public ProductoAsociadoTienda ocultarProductoAsociadoTienda(Long id){
-        ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findByIdProductoAsociadoTienda(id).orElse(null);
+        ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findById(id).orElse(null);
         if (existente != null){
             existente.setVisibleEnTienda(false);
             return productoAsociadoTiendaRepository.save(existente);

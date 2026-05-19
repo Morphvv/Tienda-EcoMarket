@@ -34,9 +34,9 @@ public class AsignacionPersonalService {
         return asignacionPersonalRepository.findByIdTienda(idTienda);
     }
 
-    //Modificar la asignacion del personal de la tienda por su id 
+    //Modificar la asignacion del personal de la tienda por su id
     public AsignacionPersonal modificarAsignacionP(Long idAsignacionPersonal, AsignacionPersonal asignacionPersonal){
-        AsignacionPersonal existente = asignacionPersonalRepository.findByIdAsignacion(idAsignacionPersonal).orElse(null);
+        AsignacionPersonal existente = asignacionPersonalRepository.findById(idAsignacionPersonal).orElse(null);
         if (existente != null){
             existente.setNombreEmpleado(asignacionPersonal.getNombreEmpleado());
             existente.setCargo(asignacionPersonal.getCargo());
@@ -47,9 +47,9 @@ public class AsignacionPersonalService {
         return null;
     }
 
-    //Desactivar la asignacion del personal de la tienda por su id 
+    //Desactivar la asignacion del personal de la tienda por su id
     public AsignacionPersonal desactivarAsignacionP(Long id){
-        AsignacionPersonal existente = asignacionPersonalRepository.findByIdAsignacion(idAsignacion).orElse(null);
+        AsignacionPersonal existente = asignacionPersonalRepository.findById(id).orElse(null);
         if (existente != null){
             existente.setEstadoAsignacion("INACTIVA");
             return asignacionPersonalRepository.save(existente);

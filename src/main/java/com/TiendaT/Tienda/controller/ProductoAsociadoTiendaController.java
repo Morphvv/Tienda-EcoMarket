@@ -58,7 +58,7 @@ public class ProductoAsociadoTiendaController {
     //Eliminar producto asociado
     @DeleteMapping("/eliminar/{idProductoAsociado}")
     public void eliminarProductoAsociadoTienda(@PathVariable Long idProductoAsociado){
-        productoAsociadoTiendaService.eliminarProductoAsociadoTienda(idProductoAsociado)
+        productoAsociadoTiendaService.eliminarProductoAsociadoTienda(idProductoAsociado);
     }
         
 }

@@ -10,7 +10,7 @@ import com.TiendaT.Tienda.repository.HorarioPersonalRepository;
 
 import jakarta.transaction.Transactional;
 
-@Service 
+@Service
 @Transactional
 
 public class HorarioPersonalService {
@@ -25,7 +25,7 @@ public class HorarioPersonalService {
     }
 
     //Listar todos los horarios del personal de la tienda
-    public List <HorarioPersonal> listar(){
+    public List<HorarioPersonal> listar(){
         return horarioPersonalRepository.findAll();
     }
 
@@ -36,7 +36,7 @@ public class HorarioPersonalService {
 
     //Modificar el horario del personal de la tienda por el id
     public HorarioPersonal modificar(Long id, HorarioPersonal horarioPersonal){
-        HorarioPersonal existente = horarioPersonalRepository.findByIdHorarioPersonal(id).orElse(null);
+        HorarioPersonal existente = horarioPersonalRepository.findById(id).orElse(null);
         if (existente != null){
             existente.setDiaSemana(horarioPersonal.getDiaSemana());
             existente.setHoraInicio(horarioPersonal.getHoraInicio());
@@ -47,9 +47,9 @@ public class HorarioPersonalService {
         return null;
     }
 
-    //Desactivar el horario del personal de la tienda por el id 
+    //Desactivar el horario del personal de la tienda por el id
     public HorarioPersonal desactivar(Long id){
-        HorarioPersonal existente = horarioPersonalRepository.findByHorarioPeresonal(id).orElse(null);
+        HorarioPersonal existente = horarioPersonalRepository.findById(id).orElse(null);
         if (existente != null){
             existente.setActivo(false);
             return horarioPersonalRepository.save(existente);
@@ -58,7 +58,7 @@ public class HorarioPersonalService {
     }
 
     //Eliminar el horario del personal de la tienda por id
-    public void eliminar(Lond id){
+    public void eliminar(Long id){
         horarioPersonalRepository.deleteById(id);
     }
 

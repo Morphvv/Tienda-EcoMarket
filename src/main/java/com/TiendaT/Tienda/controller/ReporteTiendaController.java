@@ -40,7 +40,7 @@ public class ReporteTiendaController {
     //Listar reporte por id de tienda
     @GetMapping("/listar/tienda/{idTienda}")
     public List<ReporteTienda> listarPorTiendaReporte(@PathVariable Long idTienda){
-        return reporteTiendaService.listarPorTiendaReporte(idTienda, reporteTienda);
+        return reporteTiendaService.listarPorTiendaReporte(idTienda);
     }
 
     //Modificar reporte por el id
