@@ -54,7 +54,7 @@ class TiendaServiceTest {
     }
 
     @Test
-    void buscarTiendaPorId_cuandoExiste_debeRetornarTienda() {
+    void buscarTiendaPorId_debeRetornarTienda() {
         Tienda tienda = new Tienda();
         tienda.setIdTienda(1L);
         tienda.setNombre("EcoMarket Sur");
@@ -68,7 +68,7 @@ class TiendaServiceTest {
     }
 
     @Test
-    void buscarTiendaPorId_cuandoNoExiste_debeRetornarNull() {
+    void buscarTiendaPorId_debeRetornarNull() { //Cuando no existe
         when(tiendaRepository.findById(99L)).thenReturn(Optional.empty());
 
         Tienda resultado = tiendaService.buscarTiendaPorId(99L);
@@ -77,7 +77,7 @@ class TiendaServiceTest {
     }
 
     @Test
-    void modificarTienda_cuandoExiste_debeActualizarCampos() {
+    void modificarTienda_ActualizarCampos() {
         Tienda existente = new Tienda();
         existente.setIdTienda(1L);
         existente.setNombre("Nombre Viejo");
@@ -100,7 +100,7 @@ class TiendaServiceTest {
     }
 
     @Test
-    void modificarTienda_cuandoNoExiste_debeRetornarNull() {
+    void modificarTienda_Null() { //Cuando no existe
         when(tiendaRepository.findById(99L)).thenReturn(Optional.empty());
 
         Tienda resultado = tiendaService.modificarTienda(99L, new Tienda());
@@ -110,7 +110,7 @@ class TiendaServiceTest {
     }
 
     @Test
-    void desactivarTienda_cuandoExiste_debeCambiarEstadoAInactiva() {
+    void desactivarTienda_ambiarEstadoAInactiva() { //Cuando existe
         Tienda existente = new Tienda();
         existente.setIdTienda(1L);
         existente.setEstado("ACTIVA");
@@ -124,7 +124,7 @@ class TiendaServiceTest {
     }
 
     @Test
-    void desactivarTienda_cuandoNoExiste_debeRetornarNull() {
+    void desactivarTienda_debeRetornarNull() {
         when(tiendaRepository.findById(99L)).thenReturn(Optional.empty());
 
         Tienda resultado = tiendaService.desactivarTienda(99L);
