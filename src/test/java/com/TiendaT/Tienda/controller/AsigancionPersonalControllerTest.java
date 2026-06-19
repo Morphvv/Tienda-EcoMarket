@@ -30,7 +30,10 @@ class AsigancionPersonalControllerTest {
     @Test
     void crearAsignacionP() throws Exception{
         AsignacionPersonal asignacion = new AsignacionPersonal();
+        asignacion.setIdTienda(1L);
+        asignacion.setIdEmpleado(1L);
         asignacion.setNombreEmpleado("Juan Perez");
+        asignacion.setCargo("Vendedor");
         asignacion.setEstadoAsignacion("ACTIVA");
 
         when(asignacionPersonalService.crearAsignacionP(any(AsignacionPersonal.class))).thenReturn(asignacion);

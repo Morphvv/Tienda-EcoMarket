@@ -16,6 +16,7 @@ class AsignacionPersonalRepositoryTest {
     void guardarAsignacion(){
         AsignacionPersonal asignacion = new AsignacionPersonal();
         asignacion.setIdTienda(1L);
+        asignacion.setIdEmpleado(1L);
         asignacion.setNombreEmpleado("Juan Perez");
         asignacion.setCargo("Vendedor");
         asignacion.setEstadoAsignacion("ACTIVA");
@@ -30,17 +31,23 @@ class AsignacionPersonalRepositoryTest {
     void buscarTiendaId(){
         AsignacionPersonal a1 = new AsignacionPersonal();
         a1.setIdTienda(1L);
+        a1.setIdEmpleado(1L);
         a1.setNombreEmpleado("Juan Perez");
+        a1.setCargo("Vendedor");
         a1.setEstadoAsignacion("ACTIVA");
 
         AsignacionPersonal a2 = new AsignacionPersonal();
         a2.setIdTienda(1L);
+        a2.setIdEmpleado(2L);
         a2.setNombreEmpleado("Maria Lopez");
+        a2.setCargo("Cajera");
         a2.setEstadoAsignacion("ACTIVA");
 
         AsignacionPersonal a3 = new AsignacionPersonal();
         a3.setIdTienda(2L);
+        a3.setIdEmpleado(3L);
         a3.setNombreEmpleado("Pedro Soto");
+        a3.setCargo("Almacenero");
         a3.setEstadoAsignacion("ACTIVA");
 
         asignacionPersonalRepository.save(a1);

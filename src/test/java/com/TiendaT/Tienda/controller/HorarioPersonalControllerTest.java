@@ -30,6 +30,7 @@ class HorarioPersonalControllerTest {
     @Test
     void crearHorarioP() throws Exception{
         HorarioPersonal horario = new HorarioPersonal();
+        horario.setIdAsignacion(1L);
         horario.setDiaSemana("LUNES");
         horario.setActivo(true);
         

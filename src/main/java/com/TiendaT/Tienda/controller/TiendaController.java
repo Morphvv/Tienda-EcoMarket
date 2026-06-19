@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class TiendaController {
     //Crear una nueva tienda
     @Operation(summary = "Crear una nueva tienda")
     @PostMapping("/crear")
-    public Tienda crearTienda(@RequestBody Tienda tienda){
+    public Tienda crearTienda(@Valid @RequestBody Tienda tienda){
         return tiendaService.crearTienda(tienda);
     }
 

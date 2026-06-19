@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class HorarioPersonalController {
     //Crear horario del personal
     @Operation(summary = "Crear un horario del personal")
     @PostMapping("/crear")
-    public HorarioPersonal crear(@RequestBody HorarioPersonal horarioPersonal){
+    public HorarioPersonal crear(@Valid @RequestBody HorarioPersonal horarioPersonal){
         return horarioPersonalService.crear(horarioPersonal);
     }
 

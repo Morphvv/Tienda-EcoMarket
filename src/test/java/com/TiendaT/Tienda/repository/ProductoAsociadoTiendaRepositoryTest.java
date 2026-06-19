@@ -30,16 +30,19 @@ class ProductoAsociadoTiendaRepositoryTest {
     void buscarProductoTienda(){
         ProductoAsociadoTienda p1 = new ProductoAsociadoTienda();
         p1.setIdTienda(1L);
+        p1.setIdProducto(1L);
         p1.setNombreProducto("Manzana Organica");
         p1.setVisibleEnTienda(true);
 
         ProductoAsociadoTienda p2 = new ProductoAsociadoTienda();
         p2.setIdTienda(1L);
+        p2.setIdProducto(2L);
         p2.setNombreProducto("Pera Organica");
         p2.setVisibleEnTienda(true);
 
         ProductoAsociadoTienda p3 = new ProductoAsociadoTienda();
         p3.setIdTienda(2L);
+        p3.setIdProducto(3L);
         p3.setNombreProducto("Naranja Organica");
         p3.setVisibleEnTienda(true);
 

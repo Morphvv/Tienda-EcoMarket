@@ -25,7 +25,8 @@ public class ProductoAsociadoTiendaService {
     //Crear un producto asociado a la tienda
     public ProductoAsociadoTienda crearProductoAsociado(ProductoAsociadoTienda productoAsociadoTienda){
         try {
-            ProductoDTO producto = catalogoClient.obtenerProductoPorId(productoAsociadoTienda.getIdProducto());
+            Long idProducto = productoAsociadoTienda.getIdProducto();
+            ProductoDTO producto = catalogoClient.obtenerProductoPorId(idProducto);
             if (producto != null) {
                 productoAsociadoTienda.setNombreProducto(producto.getNombre());
             }

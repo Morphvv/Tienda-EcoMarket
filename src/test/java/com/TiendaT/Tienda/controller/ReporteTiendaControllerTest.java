@@ -30,6 +30,7 @@ class ReporteTiendaControllerTest {
     @Test
     void crearReporteTienda() throws Exception{
         ReporteTienda reporte = new ReporteTienda();
+        reporte.setIdTienda(1L);
         reporte.setTipoReporte("VENTAS");
 
         when(reporteTiendaService.crearReporteTienda(any(ReporteTienda.class))).thenReturn(reporte);

@@ -30,6 +30,7 @@ class HorarioTiendaControllerTest {
     @Test
     void crearHorarioTienda() throws Exception{
         HorarioTienda horario = new HorarioTienda();
+        horario.setIdTienda(1L);
         horario.setDiaSemana("LUNES");
         horario.setActivo(true);
 

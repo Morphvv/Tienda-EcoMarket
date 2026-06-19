@@ -15,7 +15,7 @@ public class CatalogoClient {
     @Autowired
     private WebClient webClient;
 
-    public ProductoDTO obtenerProducteloPorId(Long idProducto){
+    public ProductoDTO obtenerProductoPorId(Long idProducto){
         return webClient.get()
                 .uri("/api/v1/catalogo/buscar/{id}", idProducto)
                 .retrieve()

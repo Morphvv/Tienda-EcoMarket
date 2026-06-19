@@ -30,6 +30,8 @@ class ProductoAsociadoTiendaControllerTest {
     @Test
     void crearProductoAsociado() throws Exception{
         ProductoAsociadoTienda producto = new ProductoAsociadoTienda();
+        producto.setIdTienda(1L);
+        producto.setIdProducto(1L);
         producto.setNombreProducto("Manzana Roja");
         producto.setVisibleEnTienda(true);
 

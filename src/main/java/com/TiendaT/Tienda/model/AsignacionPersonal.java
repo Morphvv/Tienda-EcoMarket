@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,9 +25,13 @@ public class AsignacionPersonal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAsignacion;
 
+    @NotNull
     private Long idTienda;
+    @NotNull
     private Long idEmpleado;
+    @NotBlank
     private String nombreEmpleado;
+    @NotBlank
     private String cargo;
     private LocalDateTime fechaInicio;
     private LocalDateTime fechaTermino;
