@@ -1,0 +1,19 @@
+package com.TiendaT.Tienda.config;
+
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SwaggerConfig {
+
+    @Bean
+    public OpenAPI custonOpenAPI(){
+        return new OpenAPI()
+            .info(new Info()
+            .title("EcoMarket - Tienda")
+            .version("1.0")
+        .description("API REST para la gestion de tiendas del sistema EcoMarket"));
+    }
+}

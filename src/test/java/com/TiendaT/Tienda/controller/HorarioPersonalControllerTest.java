@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
@@ -24,7 +24,7 @@ class HorarioPersonalControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
+    @MockitoBean
     private HorarioPersonalService horarioPersonalService;
 
     @Test
@@ -37,7 +37,7 @@ class HorarioPersonalControllerTest {
 
         mockMvc.perform(post("/api/v1/HorarioPersonal/crear")
                 .contentType(MediaType.APPLICATION_JSON)
-                .conetnt(objectMapper.writesValueAsString(horario)))
+                .content(objectMapper.writeValueAsString(horario)))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.diaSemana").value("LUNES"))
             .andExpect(jsonPath("$.activo").value(true));
@@ -52,10 +52,10 @@ class HorarioPersonalControllerTest {
 
         when(horarioPersonalService.listar()).thenReturn(List.of(h1, h2));
 
-        mockMv.perform(get("/api/v1/HorarioPersonal/listar"))
+        mockMvc.perform(get("/api/v1/HorarioPersonal/listar"))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.length()").value(2))
-            .andExpect(jsonPath("$.[0].diaSemana").value("LUNES"));
+            .andExpect(jsonPath("$[0].diaSemana").value("LUNES"));
     }
 
     @Test

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
@@ -24,14 +24,14 @@ class HorarioTiendaControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @MockBean
+    @MockitoBean
     private HorarioTiendaService horarioTiendaService;
 
     @Test
     void crearHorarioTienda() throws Exception{
         HorarioTienda horario = new HorarioTienda();
         horario.setDiaSemana("LUNES");
-        horario.setActivo("true");
+        horario.setActivo(true);
 
         when(horarioTiendaService.crearHorarioTienda(any(HorarioTienda.class))).thenReturn(horario);
 

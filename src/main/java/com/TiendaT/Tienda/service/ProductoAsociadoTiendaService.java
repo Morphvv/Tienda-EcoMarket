@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.TiendaT.Tienda.client.CatalogoClient;
+import com.TiendaT.Tienda.dto.ProductoDTO;
 import com.TiendaT.Tienda.model.ProductoAsociadoTienda;
 import com.TiendaT.Tienda.repository.ProductoAsociadoTiendaRepository;
 
 import jakarta.transaction.Transactional;
-
 @Service
 @Transactional
 
@@ -18,11 +19,25 @@ public class ProductoAsociadoTiendaService {
     @Autowired
     private ProductoAsociadoTiendaRepository productoAsociadoTiendaRepository;
 
+    @Autowired
+    private CatalogoClient catalogoClient;
+
     //Crear un producto asociado a la tienda
     public ProductoAsociadoTienda crearProductoAsociado(ProductoAsociadoTienda productoAsociadoTienda){
+        try {
+            ProductoDTO producto = catalogoClient.obtenerProductoPorId(productoAsociadoTienda.getIdProducto());
+            if (producto != null) {
+                productoAsociadoTienda.setNombreProducto(producto.getNombre());
+            }
+        } catch (Exception e) {
+            if (productoAsociadoTienda.getNombreProducto() == null) {
+                productoAsociadoTienda.setNombreProducto("Producto no disponible");
+            }
+        }
         productoAsociadoTienda.setVisibleEnTienda(true);
         return productoAsociadoTiendaRepository.save(productoAsociadoTienda);
     }
+
 
     //Listar todos los productos asociados a la tienda
     public List <ProductoAsociadoTienda> listarTiendaProducto(){
@@ -37,7 +52,7 @@ public class ProductoAsociadoTiendaService {
     //Modificar producto asociado a la tienda por el id
     public ProductoAsociadoTienda modificarProductoTienda(Long id, ProductoAsociadoTienda productoAsociadoTienda){
         ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findById(id).orElse(null);
-        if (existente != null){
+        if (existente != null) {
             existente.setNombreProducto(productoAsociadoTienda.getNombreProducto());
             existente.setVisibleEnTienda(productoAsociadoTienda.isVisibleEnTienda());
             return productoAsociadoTiendaRepository.save(existente);
@@ -48,7 +63,7 @@ public class ProductoAsociadoTiendaService {
     //Ocultar un producto asociado a la tienda por el id
     public ProductoAsociadoTienda ocultarProductoAsociadoTienda(Long id){
         ProductoAsociadoTienda existente = productoAsociadoTiendaRepository.findById(id).orElse(null);
-        if (existente != null){
+        if (existente != null) {
             existente.setVisibleEnTienda(false);
             return productoAsociadoTiendaRepository.save(existente);
         }

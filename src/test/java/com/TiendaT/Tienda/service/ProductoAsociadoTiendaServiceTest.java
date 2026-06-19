@@ -1,4 +1,7 @@
 package com.TiendaT.Tienda.service;
+
+import com.TiendaT.Tienda.client.CatalogoClient;
+import com.TiendaT.Tienda.dto.ProductoDTO;
 import com.TiendaT.Tienda.model.ProductoAsociadoTienda;
 import com.TiendaT.Tienda.repository.ProductoAsociadoTiendaRepository;
 import org.junit.jupiter.api.Test;
@@ -14,11 +17,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+
 @ExtendWith(MockitoExtension.class)
 class ProductoAsociadoTiendaServiceTest {
 
     @Mock
     private ProductoAsociadoTiendaRepository productoAsociadoTiendaRepository;
+
+    @Mock
+    private CatalogoClient catalogoClient;
 
     @InjectMocks
     private ProductoAsociadoTiendaService productoAsociadoTiendaService;
@@ -26,15 +33,69 @@ class ProductoAsociadoTiendaServiceTest {
     @Test
     void crearProductoAsociad(){
         ProductoAsociadoTienda producto = new ProductoAsociadoTienda();
-        producto.setNombreProducto("Manzana Roja");
+        producto.setIdProducto(10L);
+
+        ProductoDTO dto = new ProductoDTO();
+        dto.setIdProducto(10L);
+        dto.setNombre("Manzana Roja");
+        dto.setDescripcion("Fruta");
+        dto.setPrecio(100.0);
+        dto.setEstado("ACTIVO");
+
+        when(catalogoClient.obtenerProductoPorId(10L)).thenReturn(dto);
+        when(productoAsociadoTiendaRepository.save(any(ProductoAsociadoTienda.class)))
+            .thenAnswer(inv -> inv.getArgument(0, ProductoAsociadoTienda.class));
+
+        ProductoAsociadoTienda resultado = productoAsociadoTiendaService.crearProductoAsociado(producto);
+
+        assertEquals("Manzana Roja", resultado.getNombreProducto());
+        assertTrue(resultado.isVisibleEnTienda());
+        verify(productoAsociadoTiendaRepository, times(1)).save(producto);
+    }
+
+    @Test
+    void crearProductoAsociado_productoNull(){
+        ProductoAsociadoTienda producto = new ProductoAsociadoTienda();
+        producto.setNombreProducto("Nombre manual");
 
         when(productoAsociadoTiendaRepository.save(any(ProductoAsociadoTienda.class)))
             .thenAnswer(inv -> inv.getArgument(0, ProductoAsociadoTienda.class));
 
         ProductoAsociadoTienda resultado = productoAsociadoTiendaService.crearProductoAsociado(producto);
 
+        assertEquals("Nombre manual", resultado.getNombreProducto());
         assertTrue(resultado.isVisibleEnTienda());
-        verify(productoAsociadoTiendaRepository, times(1)).save(producto);
+    }
+
+    @Test
+    void crearProductoAsociado_excepcionNombreNull(){
+        ProductoAsociadoTienda producto = new ProductoAsociadoTienda();
+        producto.setIdProducto(1L);
+
+        when(catalogoClient.obtenerProductoPorId(1L)).thenThrow(new RuntimeException("Error"));
+        when(productoAsociadoTiendaRepository.save(any(ProductoAsociadoTienda.class)))
+            .thenAnswer(inv -> inv.getArgument(0, ProductoAsociadoTienda.class));
+
+        ProductoAsociadoTienda resultado = productoAsociadoTiendaService.crearProductoAsociado(producto);
+
+        assertEquals("Producto no disponible", resultado.getNombreProducto());
+        assertTrue(resultado.isVisibleEnTienda());
+    }
+
+    @Test
+    void crearProductoAsociado_excepcionConNombre(){
+        ProductoAsociadoTienda producto = new ProductoAsociadoTienda();
+        producto.setIdProducto(1L);
+        producto.setNombreProducto("Nombre existente");
+
+        when(catalogoClient.obtenerProductoPorId(1L)).thenThrow(new RuntimeException("Error"));
+        when(productoAsociadoTiendaRepository.save(any(ProductoAsociadoTienda.class)))
+            .thenAnswer(inv -> inv.getArgument(0, ProductoAsociadoTienda.class));
+
+        ProductoAsociadoTienda resultado = productoAsociadoTiendaService.crearProductoAsociado(producto);
+
+        assertEquals("Nombre existente", resultado.getNombreProducto());
+        assertTrue(resultado.isVisibleEnTienda());
     }
 
     @Test
@@ -75,7 +136,7 @@ class ProductoAsociadoTiendaServiceTest {
         datos.setVisibleEnTienda(false);
 
         when(productoAsociadoTiendaRepository.findById(1L)).thenReturn(Optional.of(existente));
-        when(productoAsociadoTiendaRepository.save(any(ProductoAsociadoTienda.class))
+        when(productoAsociadoTiendaRepository.save(any(ProductoAsociadoTienda.class)))
             .thenAnswer(inv -> inv.getArgument(0, ProductoAsociadoTienda.class));
 
         ProductoAsociadoTienda resultado = productoAsociadoTiendaService.modificarProductoTienda(1L, datos);
